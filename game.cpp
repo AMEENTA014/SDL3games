@@ -2,7 +2,11 @@
 #include<SDL3/SDL.h>//inorder to use the abstraction for using the winman loops and render 
 				     // also for using sdl3 we need this file
 int main(int  , char ** ){
-if(SDL_Init(SDL_INIT_VIDEO)!=0){std::cerr << "dl_init failed" << SDL_GetError() << "\n" ; return 1;}//initialise the window so that some systems and default configs are set underneath
+if(SDL_Init(SDL_INIT_VIDEO)==false){
+  std::cerr << "this is error ofc"<<SDL_GetError() << "\n" ; 
+  return 1 ; 
+};
+std::cout << "this is fine "; //initialise the window so that some systems and default configs are set underneath
 SDL_Window *window = SDL_CreateWindow(//creating a window by requesting the window manager 
 		"sdl3game " , //title of the game and this structure is used for managing the windows
 		800, 600, 

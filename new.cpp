@@ -5,11 +5,9 @@ int main(int, char**)
 {
     std::cout << "Starting program...\n";
 
-    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-        std::cerr <<" SDL_Init failed:"  << SDL_GetError() << "\n";
-        return 1;
-    }
-    std::cout << "SDL_Init OK\n";
+int ret =     SDL_Init(SDL_INIT_VIDEO); 
+        
+    std::cout << "SDL_Init OK\n" << ret <<"\n";
 
     SDL_Window* window = SDL_CreateWindow("SDL debug", 800, 600, 0);
 if(!window){
