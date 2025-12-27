@@ -16,6 +16,7 @@ SDL_Window *window = SDL_CreateWindow(//creating a window by requesting the wind
 SDL_Renderer * renderer = SDL_CreateRenderer(window,nullptr); 
 bool running = true;
 float x = 0.0f; 
+float y = 600.0f; 
 while(running){
 SDL_Event event; 
    while(SDL_PollEvent(&event)){
@@ -25,11 +26,12 @@ SDL_Event event;
  
      }
    x+=2.0f; 
-   if(x>800)x=0; 
+   y-=2.0f;
+   if(x>800){x=0;y=600;  }
    SDL_SetRenderDrawColor(renderer,0,0,0,255); 
    SDL_RenderClear(renderer); 
    SDL_SetRenderDrawColor(renderer,255,0,0,255);
-   SDL_FRect rect = {x, 200, 50 , 50 }; 
+   SDL_FRect rect = {x, y, 50 , 50 }; 
    SDL_RenderFillRect(renderer, &rect); 
    SDL_RenderPresent(renderer);
    SDL_Delay(16);

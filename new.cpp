@@ -1,47 +1,35 @@
-#include <iostream>
-#include <SDL3/SDL.h>
-
-int main(int, char**)
-{
-    std::cout << "Starting program...\n";
-
-int ret =     SDL_Init(SDL_INIT_VIDEO); 
-        
-    std::cout << "SDL_Init OK\n" << ret <<"\n";
-
-    SDL_Window* window = SDL_CreateWindow("SDL debug", 800, 600, 0);
-if(!window){
-	std::cerr <<" CreateWindow failed:"  << SDL_GetError() << "\n";
-        return 1;
-    }
-    std::cout << "Window OK\n";
-
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, nullptr);
-if(!renderer){ 
- 	std::cerr <<" CreateRenderer failed:"  << SDL_GetError() << "\n";
-        return 1;
-    }
-    std::cout << "Renderer OK\n";
-
-    bool running = true;
-    SDL_Event e;
-
-    while (running) {
-        while (SDL_PollEvent(&e)) {
-            if (e.type == SDL_EVENT_QUIT)
-                running = false;
+#include<iostream>
+#include<SDL3/SDL.h>
+int main(){
+  if(SDL_Init(SDL_INIT_VIDEO)==false) 
+    {
+	    std::cerr << "init subsystems are failed " << SDL_GetError() << "\n" ; 	
+	    return 1; 
+    }; 
+SDL_Window *window  = SDL_CreateWindow(
+		"pacman", 800 , 600 , 0  //this data structure is to define a window 
+		);
+      if(!window){
+	std::cerr << "error in window creation" << SDL_GetError() << "\n" ;
+	return 1 ; 
         }
-
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
-
-        SDL_RenderPresent(renderer);
-    }
-
-    std::cout << "Exiting cleanly...n";
-
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
-    return 0 ; 
-}
+SDL_Renderer * renderer = SDL_CreateRenderer(
+	           window,nullptr 	//this is to interact with the framebuffer or the window 
+		);
+      if(!renderer){
+	std::cerr << "error in render creation" << SDL_GetError() << "\n" ;
+	return 1; 
+	}
+    bool running = true;
+     while(running){
+        SDL_Event event ; 
+	while(SDL_PollEvent(&event)){
+		if(event.type == SDL_EVENT_QUIT)running = false ; 	
+			
+			}
+     } 
+     SDL_DestroyRenderer(renderer); 
+     SDL_DestroyWindow(window); 
+     SDL_Quit();
+return 0 ; 
+          }
