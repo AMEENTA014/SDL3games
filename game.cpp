@@ -14,7 +14,7 @@ SDL_Window *window = SDL_CreateWindow(//creating a window by requesting the wind
 SDL_Renderer * renderer = SDL_CreateRenderer(window,nullptr);//inorder to draw to the window we need renderer  
 bool running = true;//running should be true means currently the window is working 
 float x = 0.0f; 
-float y = 600.0f; //coordinates for the box to appear 
+ //coordinates for the box to appear 
 while(running){
 SDL_Event event;//structure for the event , which is used to store the events from the os  
    while(SDL_PollEvent(&event)){//move the events to the event structure for processing 
@@ -23,15 +23,15 @@ SDL_Event event;//structure for the event , which is used to store the events fr
 	}
  
      }
-   x+=2.0f; 
-   y-=2.0f;
-   if(x>800){x=0;y=600;  }
+   if(x<750){
+	 x+=2.0f;  
    SDL_SetRenderDrawColor(renderer,0,0,0,255); //setting the color and clearing the back buffer 
    SDL_RenderClear(renderer); 
    SDL_SetRenderDrawColor(renderer,255,0,0,255);//set color again and create a rectangle structure 
-   SDL_FRect rect = {x, y, 50 , 50 }; 
+   SDL_FRect rect = {x, 300, 50 , 50 }; 
    SDL_RenderFillRect(renderer, &rect);//draw the rectangle using the renderer 
    SDL_RenderPresent(renderer);
+   }
    SDL_Delay(16);
 
     }
